@@ -9,8 +9,6 @@ DAN.profile['df_list']=['Dummy_Sensor', 'Dummy_Control','OneParameter','ThreePar
 DAN.profile['d_name']= None # None for autoNaming
 DAN.device_registration_with_retry(ServerIP, Reg_addr)
 
-printFlag = 0
-
 # Start Device
 while True:
     try:
@@ -18,20 +16,8 @@ while True:
         value1 = DAN.pull('Dummy_Control') # array
 
         if value1 != None:
-            print(value1)
-            if value1[0] == 1:
-                print("start printing")
-                printFlag = 1
-            else:
-                print("stop printing")
-                printFlag = 0
-
-        if printFlag == 1:
-            print (random.randint(1,101)) # between 1 and 100
-
-    #Push data to a device feature called "Dummy_Sensor"
-        # value2=random.uniform(1, 10)
-        # DAN.push ('Dummy_Sensor', value2)
+            if(value1[0] != 0):
+                print(value1)
 
     except Exception as e:
         print(e)
